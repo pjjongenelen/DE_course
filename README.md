@@ -1,6 +1,17 @@
 # Data Engineering 
 > A S1.1 course at JADS
 
+### Built With
+pandas 1.1.1  
+numpy 1.19.1
+
+----------
+
+Updated to this point
+
+----------
+
+
 ## Installing / Getting started
 
 A quick introduction of the minimal setup you need to get a hello world up &
@@ -14,8 +25,6 @@ Here you should say what actually happens when you execute the code above.
 
 ## Developing
 
-### Built With
-List main libraries, frameworks used including versions (React, Angular etc...)
 
 ### Prerequisites
 What is needed to set up the dev environment. For instance, global dependencies or any other tools. include download links.
