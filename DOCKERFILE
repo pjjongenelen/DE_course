@@ -10,7 +10,7 @@
 # Container is listening on port 5000
 #EXPOSE 5000
 
-// Dockerfile
+# Dockerfile
 FROM postgres:alpine
 COPY *.sql /docker-entrypoint-initdb.d/
 ADD schema.sql /docker-entrypoint-initdb.d
