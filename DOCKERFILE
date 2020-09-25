@@ -1,0 +1,11 @@
+# Select the correct parent image
+FROM python:3.7.7-buster
+
+# Set working directory
+WORKDIR /usr/src/database
+
+# Copy the database into the working directory
+COPY data_cleaned.csv .
+
+# Container is listening on port 5000
+EXPOSE 5000
