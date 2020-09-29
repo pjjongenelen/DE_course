@@ -2,15 +2,15 @@ CREATE TABLE fifa (
 
     ID INT PRIMARY KEY,
 
-    Name CHAR(20),
+    Name TEXT,
     Age INT,
     Value INT,
     Wage INT,
-    Preferred_Foot CHAR(20),
+    Preferred_Foot TEXT,
     Weak_Foot INT,
     Trick_Skills INT,
-    Work_Rate CHAR(20),
-    Position CHAR(20),
+    Work_Rate TEXT,
+    Position TEXT,
     Jersey_Number INT,
     Contract_Valid_Until INT,
     Height INT,
@@ -48,9 +48,9 @@ CREATE TABLE fifa (
     Marking INT,
     StandingTackle INT,
     SlidingTackle INT,
-    Work_Rate_A CHAR(20),
-    Work_Rate_D CHAR(20),
+    Work_Rate_A TEXT,
+    Work_Rate_D TEXT,
     Position_cat INT,
     Basic_Player INT,
     Position_Stat INT
-)
+);
