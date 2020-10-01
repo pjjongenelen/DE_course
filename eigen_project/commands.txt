@@ -1,0 +1,19 @@
+=-=-=-=-=-=-=-=-=GOOGLE CLOUD=-=-=-=-=-=-=-=-=
+sudo docker build -t database:0.0.1 .
+sudo docker run -p 5000:5000 database:0.0.1
+
+
+=-=-=-=-=-=-=-=-=INSOMNIA=-=-=-=-=-=-=-=-=
+
+http://{EXTERNAL IP}:5000/training-db/fifa
+
+JSON snippet:
+{
+	"columns": [
+		"Name", 
+		"Age",
+		"Value",
+		"Wage", 
+		"Preferred_Foot"
+	]
+}
