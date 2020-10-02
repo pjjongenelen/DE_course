@@ -1,7 +1,9 @@
 =-=-=-=-=-=-=-=-=GOOGLE CLOUD=-=-=-=-=-=-=-=-=
 sudo docker build -t database:0.0.1 .
-sudo docker run -p 5000:5000 database:0.0.1
+sudo docker run -p 5000:5000 -d --name=fifadbAPI database:0.0.1
 
+sudo docker build -t trainingcp:0.0.1 .
+sudo docker run -p 5000:5000 trainingcp:0.0.1
 
 =-=-=-=-=-=-=-=-=INSOMNIA=-=-=-=-=-=-=-=-=
 
@@ -17,3 +19,17 @@ JSON snippet:
 		"Preferred_Foot"
 	]
 }
+
+CREATE CONTAINERS:
+sudo docker build -t fifa/trainapi:0.0.1 .
+sudo docker run -p  5001:5000 -v /home/{USERNAME}/models:/usr/src/myapp/models -e TRAIN_DB_API='http://fifadbAPI:5000/training-db/fifa' -d --name=fifatrainAPI trainingcp:0.0.1
+
+TO TRAIN MODEL:
+http://{EXTERNAL IP}:5000/training-cp/fifa
+
+CREATE NETWORK (AND CONNECT):
+sudo docker network create fifa_network
+
+sudo docker network connect fifa_network database:0.0.1
+sudo docker network connect fifa_network trainingcp:0.0.1
+

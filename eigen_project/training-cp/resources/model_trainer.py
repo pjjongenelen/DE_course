@@ -15,7 +15,8 @@ from sklearn.metrics import mean_squared_error
 
 def train(dataset):
     # split into input (X) and output (Y) variables
-    X = dataset[:2]+dataset[3:]
+    # dataset = pd.read_sql_table(dataset, http://34.91.81.251:5000/training-db/fifa)
+    X = dataset[:2]+dataset[3:] # hier sws nog aanpassingen in maken
     Y = dataset[:, 2]
 
     # make train_test split
