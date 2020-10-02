@@ -30,7 +30,7 @@ def update_data(table_name):
 @app.route('/training-db/<table_name>', methods=['GET'])
 def read_data(table_name):
     df = read_data_records(table_name)
-    df = df.drop(columns=['id'])
+    df = df.drop(columns=['ID'])
     resp = Response(df.to_json(orient='records'), status=200, mimetype='application/json')
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Methods'] = 'POST'
