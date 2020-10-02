@@ -15,12 +15,11 @@ from sklearn.metrics import mean_squared_error
 
 def train(dataset):
     # split into input (X) and output (Y) variables
-    # dataset = pd.read_sql_table(dataset, http://34.91.81.251:5000/training-db/fifa)
-    X = dataset[:2]+dataset[3:] # hier sws nog aanpassingen in maken
-    Y = dataset[:, 2]
+    Y = dataset['Value']
+    X = dataset.drop('Value', axis=1)
 
     # make train_test split
-    x_train, y_train, x_test, y_test = train_test_split(X, Y, test_size=0.25, random_state = 42)
+    x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, random_state = 42)
     # define model
     model = xgb.XGBRegressor(objective='reg:squarederror', colsample_bytree=0.3, learning_rate=0.1,
                              max_depth=4, alpha=1, n_estimators=1)
