@@ -1,0 +1,63 @@
+http://34.91.81.251:5000/training-db/fifa
+
+
+http://34.91.81.251:5000/training-db/fifa
+
+
+
+  {
+	"columns": [
+    "ID",
+    "Name",
+    "Age",
+    "Value",
+    "Wage",
+    "Preferred_Foot",
+    "Weak_Foot",
+    "Trick_Skills",
+    "Work_Rate",
+    "Position",
+    "Jersey_Number",
+    "Contract_Valid_Until",
+    "Height",
+    "Weight",
+    "Striker",
+    "CentralMidfielder",
+    "SideMidfielder",
+    "WingBack",
+    "CenterBack",
+    "Crossing",
+    "Finishing",
+    "HeadingAccuracy",
+    "ShortPassing",
+    "Volleys",
+    "Dribbling",
+    "Curve",
+    "FreeKickAccuracy",
+    "LongPassing",
+    "BallControl",
+    "Acceleration",
+    "SprintSpeed",
+    "Agility",
+    "Reactions",
+    "ShotPower",
+    "Jumping",
+    "Stamina",
+    "Strength",
+    "LongShots",
+    "Aggression",
+    "Interceptions",
+    "Positioning",
+    "Vision",
+    "Penalties",
+    "Composure",
+    "Marking",
+    "StandingTackle",
+    "SlidingTackle",
+    "Work_Rate_A",
+    "Work_Rate_D",
+    "Position_cat",
+    "Basic_Player",
+    "Position_Stat"
+]
+  }
