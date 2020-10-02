@@ -30,6 +30,6 @@ http://{EXTERNAL IP}:5000/training-cp/fifa
 CREATE NETWORK (AND CONNECT):
 sudo docker network create fifa_network
 
-sudo docker network connect fifa_network database:0.0.1
-sudo docker network connect fifa_network trainingcp:0.0.1
+sudo docker network connect fifa_network fifadbAPI
+sudo docker network connect fifa_network fifatrainAPI
 
