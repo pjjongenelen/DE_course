@@ -15,7 +15,7 @@ def train_models(model):
     r = requests.get(db_api)
     j = r.json()
     df = pd.DataFrame.from_dict(j)
-    if model == "mlp":
+    if model == "fifa":
         js = model_trainer.train(df.values)
         resp = Response(js, status=200, mimetype='application/json')
         resp.headers['Access-Control-Allow-Origin'] = '*'
