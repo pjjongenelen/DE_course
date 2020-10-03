@@ -23,6 +23,7 @@ def train(dataset):
     # define model
     model = xgb.XGBRegressor(objective='reg:squarederror', colsample_bytree=0.3, learning_rate=0.1,
                              max_depth=4, alpha=1, n_estimators=1)
+
     # Fit the model
     model.fit(x_train, y_train)
     # evaluate the model
