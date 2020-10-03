@@ -5,14 +5,15 @@ sudo docker run -p 5000:5000 -d --name=fifadbapi databaseapi:0.0.1
 
 [TRAINING COMPONENT IMAGE]
 sudo docker build -t trainingcpapi:0.0.1 .
-sudo docker run -p  5001:5000 -v /home/pusphaira3/models:/usr/src/myapp/models -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifatrainapi trainingcpapi:0.0.1
+sudo docker run -p  5001:5000 -v /home/joost_96/models:/usr/src/myapp/models -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifatrainapi trainingcpapi:0.0.1
 
 sudo docker run -p  5001:5000 -v /home/{USERNAME}/models:/usr/src/myapp/models -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifatrainapi trainingcpapi:0.0.1
 
 [PREDICTION COMPONENT IMAGE]
 sudo docker build -t predictionapi:0.0.1 .
-sudo docker run -p  5002:5000 -v /home/pusphaira3/models:/usr/src/myapp/models -d --name=predictionapi predictionapi:0.0.1
+sudo docker run -p  5002:5000 -v /home/joost_96/models:/usr/src/myapp/models -d --name=predictionapi predictionapi:0.0.1
 
+sudo docker run -p  5002:5000 -v /home/{USERNAME}/models:/usr/src/myapp/models -d --name=predictionapi predictionapi:0.0.1
 
 [SETTING UP A NETWORK]
 sudo docker network create fifa_network
@@ -20,13 +21,14 @@ sudo docker network connect fifa_network fifadbapi
 sudo docker network connect fifa_network fifatrainapi
 sudo docker network connect fifa_network predictionapi
 
-
 sudo docker network inspect fifa_network <-- kijk of ze er aan hangen
 =-=-=-=-=-=-=-=-=INSOMNIA=-=-=-=-=-=-=-=-=
 
 (voor alle database related functies) --> http://{EXTERNAL IP}:5000/training-db/fifa
 
 (voor alle training-cp related functies --> http://{EXTERNAL IP}:5001/training-cp/fifa
+
+(voor alle prediction-cp related functies --> http://{external ip}:5002/prediction-cp/fifa
 
 JSON snippet:
 {
