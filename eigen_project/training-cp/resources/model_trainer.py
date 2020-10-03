@@ -38,10 +38,10 @@ def train(dataset):
     # Saving model in a given location (provided as an env. variable
     model_repo = os.environ['MODEL_REPO']
     if model_repo:
-        file_path = os.path.join(model_repo, "model.h5")
+        file_path = os.path.join(model_repo, "model.json")
         model.save_model(file_path)
     else:
-        model.save_model("model.h5")
+        model.save_model("model.json")
         return json.dumps({'message': 'The model was saved locally.'},
                           sort_keys=False, indent=4), 200
 

@@ -1,5 +1,5 @@
 flask
-pandas==1.0.5
+paIndas==1.0.5
 numpy==1.19.1
 nltk==3.5
 scipy==1.4.1
