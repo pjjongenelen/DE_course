@@ -15,8 +15,8 @@ from sklearn.metrics import mean_squared_error
 
 def train(dataset):
     # split into input (X) and output (Y) variables
-    Y = dataset['Value']
-    X = dataset.drop('Value', axis=1)
+    Y = dataset[2]
+    X = dataset.drop([2], axis=1)
 
     # make train_test split
     x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, random_state = 42)

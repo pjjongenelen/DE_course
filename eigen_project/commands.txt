@@ -1,10 +1,17 @@
 =-=-=-=-=-=-=-=-=GOOGLE CLOUD=-=-=-=-=-=-=-=-=
-sudo docker build -t database:0.0.1 .
-sudo docker run -p 5000:5000 -d --name=fifadbAPI database:0.0.1
+[DATABASE IMAGE]
+sudo docker build -t databaseapi:0.0.1 .
+sudo docker run -p 5000:5000 -d --name=fifadbapi databaseapi:0.0.1
 
-sudo docker build -t trainingcp:0.0.1 .
-sudo docker run -p 5000:5000 trainingcp:0.0.1
+[TRAINING COMPONENT IMAGE]
+sudo docker build -t trainingcpapi:0.0.1 .
+sudo docker run -p  5001:5000 -v /home/{USERNAME}/models:/usr/src/myapp/models -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifatrainapi trainingcpapi:0.0.1
+sudo docker run -p  5001:5000 -v /home/pusphaira3/models:/usr/src/myapp/models -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifatrainapi trainingcpapi:0.0.1
 
+[SETTING UP A NETWORK]
+sudo docker network create fifa_network
+sudo docker network connect fifa_network fifadbapi
+sudo docker network connect fifa_network fifatrainapi
 =-=-=-=-=-=-=-=-=INSOMNIA=-=-=-=-=-=-=-=-=
 
 http://{EXTERNAL IP}:5000/training-db/fifa
@@ -27,9 +34,5 @@ sudo docker run -p  5001:5000 -v /home/{USERNAME}/models:/usr/src/myapp/models -
 TO TRAIN MODEL:
 http://{EXTERNAL IP}:5000/training-cp/fifa
 
-CREATE NETWORK (AND CONNECT):
-sudo docker network create fifa_network
 
-sudo docker network connect fifa_network fifadbAPI
-sudo docker network connect fifa_network fifatrainAPI
 

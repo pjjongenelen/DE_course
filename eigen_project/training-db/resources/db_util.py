@@ -3,7 +3,7 @@ import sqlalchemy as sqal
 from sqlalchemy import Column, Float, Table, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 
-# strings = ["Name", "Preferred_Foot", "Work_Rate", "Position", "Work_Rate_A", "Work_Rate_D", "Contract_Valid_Until"]
+strings = ["Name", "Preferred_Foot", "Work_Rate", "Position", "Work_Rate_A", "Work_Rate_D", "Contract_Valid_Until"]
 
 engine = sqal.create_engine('sqlite:///trainingdata.db', echo=True)
 Base = declarative_base()
