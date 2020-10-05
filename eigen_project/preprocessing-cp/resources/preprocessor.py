@@ -2,7 +2,7 @@
 # see https://machinelearningmastery.com/save-load-keras-deep-learning-models/
 import json
 import os
-import xgboost as xgb
+
 from sklearn import model_selection, preprocessing
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
@@ -20,7 +20,7 @@ def clean(dataset):
 
 
     text_out = {
-        "Preprocessing done"
+        "Preprocessing done": "successful"
     }
     # Saving model in a given location (provided as an env. variable
     data_repo = os.environ['DATA_REPO']
