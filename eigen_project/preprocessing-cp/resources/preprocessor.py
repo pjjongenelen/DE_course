@@ -26,7 +26,7 @@ def clean(dataset):
     data_repo = os.environ['DATA_REPO']
     if data_repo:
         file_path = os.path.join(data_repo)
-        dataset.to_json(file_path)
+        dataset.to_json(file_path + "/preprocessed_data.json")
     else:
         dataset.to_json("preprocessed_data.json")
         return json.dumps({'message': 'The data was saved locally.'},
