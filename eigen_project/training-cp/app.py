@@ -11,8 +11,8 @@ app.config["DEBUG"] = True
 
 @app.route('/training-cp/<model>', methods=['POST'])
 def train_models(model):
-    db_api = os.environ['TRAIN_DATA']
-    r = requests.get(db_api)
+    preprocessed_data = os.environ['TRAIN_DATA']
+    r = requests.get(preprocessed_data + '/preprocessed_data.json')
     j = r.json()
     df = pd.DataFrame.from_dict(j)
     if model == "fifa":

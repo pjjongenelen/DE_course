@@ -25,7 +25,7 @@ def clean(dataset):
     # Saving model in a given location (provided as an env. variable
     data_repo = os.environ['DATA_REPO']
     if data_repo:
-        file_path = os.path.join(data_repo, "preprocessed_data.json")
+        file_path = os.path.join(data_repo)
         dataset.to_json(file_path)
     else:
         dataset.to_json("preprocessed_data.json")
