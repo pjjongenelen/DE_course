@@ -3,20 +3,20 @@ import pandas as pd
 import requests
 from flask import Flask, json, Response
 
-from resources import model_trainer
+from resources import preprocessor
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
 
-@app.route('/training-cp/<model>', methods=['POST'])
-def train_models(model):
-    db_api = os.environ['TRAIN_DATA']
+@app.route('/preprocessing-cp/<model>', methods=['POST'])
+def preprocessing_models(model):
+    db_api = os.environ['TRAIN_DB_API']
     r = requests.get(db_api)
     j = r.json()
     df = pd.DataFrame.from_dict(j)
     if model == "fifa":
-        js = model_trainer.train(df)
+        js = preprocessor.clean(df)
         resp = Response(js, status=200, mimetype='application/json')
         resp.headers['Access-Control-Allow-Origin'] = '*'
         resp.headers['Access-Control-Allow-Methods'] = 'POST'

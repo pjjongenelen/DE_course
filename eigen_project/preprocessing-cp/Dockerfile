@@ -11,8 +11,8 @@ COPY . .
 # Expose the port that our app runs in
 EXPOSE 5000
 # Enviroment Variables
-ENV MODEL_REPO  /usr/src/myapp/models
-ENV TRAIN_DATA  /usr/src/myapp/data
+ENV DATA_REPO  /usr/src/myapp/data
+ENV TRAIN_DB_API  http://training-db:5000/training-db/fifa
 # Run our App
 CMD ["python3","app.py"]
 
