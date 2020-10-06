@@ -10,6 +10,10 @@ sudo docker run -p  5001:5000 -v /home/ellenmans97/data:/usr/src/myapp/data -e T
 sudo docker run -p  5001:5000 -v /home/{USERNAME}/data:/usr/src/myapp/data -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifapreprocessingapi fifapreprocessingapi:0.0.1
 
 
+sudo docker build -t fifapreprocessingapi:0.0.1 .
+sudo docker run -p  5001:5000 -v /home/mrbananenschil0/data:/usr/src/myapp/data -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifapreprocessingapi fifapreprocessingapi:0.0.1
+
+
 [TRAINING COMPONENT IMAGE]
 sudo docker build -t trainingcpapi:0.0.1 .
 sudo docker run -p  5002:5000 -v /home/ellenmans97/models:/usr/src/myapp/models -e TRAIN_DATA='http://fifapreprocessingapi:5000/preprocessing-cp/fifa' -d --name=fifatrainapi trainingcpapi:0.0.1
@@ -21,6 +25,7 @@ sudo docker build -t predictionapi:0.0.1 .
 sudo docker run -p  5003:5000 -v /home/ellenmans97/models:/usr/src/myapp/models -d --name=predictionapi predictionapi:0.0.1
 # General
 sudo docker run -p  5003:5000 -v /home/{USERNAME}/models:/usr/src/myapp/models -d --name=predictionapi predictionapi:0.0.1
+sudo docker run -p  5003:5000 -v /home/mrbananenschil0/models:/usr/src/myapp/models -d --name=predictionapi predictionapi:0.0.1
 
 [SETTING UP A NETWORK]
 sudo docker network create fifa_network

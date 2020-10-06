@@ -20,17 +20,20 @@ def clean(dataset):
 
 
     text_out = {
-        "Preprocessing done": "successful"
+        "Preprocessing done": dataset
     }
     # Saving model in a given location (provided as an env. variable
     data_repo = os.environ['DATA_REPO']
     if data_repo:
         file_path = os.path.join(data_repo)
-        dataset.to_json(file_path + "/preprocessed_data.json")
+        json_string = dataset.to_json(file_path + "/preprocessed_data.json")
+
+        return json.dumps(json_string, sort_keys=False, indent=4)
+
     else:
         dataset.to_json("preprocessed_data.json")
         return json.dumps({'message': 'The data was saved locally.'},
                           sort_keys=False, indent=4), 200
 
-    print("Saved the data to disk")
-    return json.dumps(text_out, sort_keys=False, indent=4)
+    #print("Saved the data to disk")
+    #return json.dumps(text_out, sort_keys=False, indent=4)

@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import requests
-from flask import Flask, json, Response
+from flask import Flask, json, Response, request
 
 from resources import preprocessor
 
@@ -21,7 +21,7 @@ def preprocessing_models(model):
         resp.headers['Access-Control-Allow-Origin'] = '*'
         resp.headers['Access-Control-Allow-Methods'] = 'POST'
         resp.headers['Access-Control-Max-Age'] = '1000'
-        return resp
+        return request.get_json()
     else:
         return json.dumps({'message': 'the given model is not supported dropped'},
                           sort_keys=False, indent=4), 400
@@ -34,13 +34,16 @@ data_repo = os.environ['DATA_REPO']
 file_path_data = os.path.join(data_repo + "/preprocessed_data.json")
 
 # For debugging, no actual fucntionality
-@app.route('/training-db/<table_name>', methods=['GET'])
+@app.route('/preprocessing-cp/<table_name>', methods=['GET'])
 def read_data(table_name):
     resp = Response(file_path_data, status=200, mimetype='application/json')
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Methods'] = 'POST'
     resp.headers['Access-Control-Max-Age'] = '1000'
-    return resp
+    preprocessed_data_test = resp.json
+
+       # pd.read_json(resp)
+    return preprocessed_data_test
 # End to be deleted
 
 
