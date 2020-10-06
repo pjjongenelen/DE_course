@@ -89,8 +89,8 @@ kubectl create -f training-cp.service.yaml
 kubectl create -f prediction-cp.deployment.yaml
 kubectl create -f prediction-cp.service.yaml
 
-kubectl get pods --namespace=myapps    (makesure all are running)
-kubectl get services --namespace=myapps (get external IPs)
+kubectl get pods --namespace=fifaxgb     (makesure all are running)
+kubectl get services --namespace=fifaxgb (get external IPs)
 
 
 

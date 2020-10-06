@@ -1,3 +1,7 @@
+kubectl create -f namespace.yaml
+kubectl get namespaces
+kubectl describe namespaces fifaxgb
+
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 
 helm repo update
@@ -5,9 +9,9 @@ helm repo update
 helm install nfs-server stable/nfs-server-provisioner --set persistence.enabled=true,persistence.size=100Gi --namespace=fifaxgb
 
 
-kubectl get pods --namespace=myapps
-kubectl get services --namespace=myapps
-kubectl get pv --namespace=myapps
+kubectl get pods --namespace=fifaxgb
+kubectl get services --namespace=fifaxgb
+kubectl get pv --namespace=fifaxgb
 
 [DATABASE]
 
