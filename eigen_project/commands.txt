@@ -3,21 +3,26 @@
 sudo docker build -t databaseapi:0.0.1 .
 sudo docker run -p 5000:5000 -d --name=fifadbapi databaseapi:0.0.1
 
+[PREPROCESSING COMPONENT IMAGE]
+sudo docker build -t fifapreprocessingapi:0.0.1 .
+sudo docker run -p  5001:5000 -v /home/ellenmans97/data:/usr/src/myapp/data -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifapreprocessingapi fifapreprocessingapi:0.0.1
+
 [TRAINING COMPONENT IMAGE]
 sudo docker build -t trainingcpapi:0.0.1 .
-sudo docker run -p  5001:5000 -v /home/ellenmans97/models:/usr/src/myapp/models -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifatrainapi trainingcpapi:0.0.1
+sudo docker run -p  5002:5000 -v /home/ellenmans97/models:/usr/src/myapp/models -e TRAIN_DATA='http://fifapreprocessingapi:5000/preprocessing-cp/fifa' -d --name=fifatrainapi trainingcpapi:0.0.1
 
-sudo docker run -p  5001:5000 -v /home/{USERNAME}/models:/usr/src/myapp/models -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifatrainapi trainingcpapi:0.0.1
+sudo docker run -p  5002:5000 -v /home/{USERNAME}/models:/usr/src/myapp/models -e TRAIN_DB_API='http://fifadbapi:5000/training-db/fifa' -d --name=fifatrainapi trainingcpapi:0.0.1
 
 [PREDICTION COMPONENT IMAGE]
 sudo docker build -t predictionapi:0.0.1 .
-sudo docker run -p  5002:5000 -v /home/ellenmans97/models:/usr/src/myapp/models -d --name=predictionapi predictionapi:0.0.1
+sudo docker run -p  5003:5000 -v /home/ellenmans97/models:/usr/src/myapp/models -d --name=predictionapi predictionapi:0.0.1
 
-sudo docker run -p  5002:5000 -v /home/{USERNAME}/models:/usr/src/myapp/models -d --name=predictionapi predictionapi:0.0.1
+sudo docker run -p  5003:5000 -v /home/{USERNAME}/models:/usr/src/myapp/models -d --name=predictionapi predictionapi:0.0.1
 
 [SETTING UP A NETWORK]
 sudo docker network create fifa_network
 sudo docker network connect fifa_network fifadbapi
+sudo docker network connect fifa_network fifapreprocessingapi
 sudo docker network connect fifa_network fifatrainapi
 sudo docker network connect fifa_network predictionapi
 
@@ -40,6 +45,56 @@ JSON snippet:
 		"Preferred_Foot"
 	]
 }
+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+VOOR LATER:
+
+
+Publishing docker images (OM IN KUBERNETES TE ZETTEN):
+sudo docker build -t [SOURCE_IMAGE] 
+docker tag [SOURCE_IMAGE] [HOSTNAME]/[PROJECT-ID]/[IMAGE]
+docker push [HOSTNAME]/[PROJECT-ID]/[IMAGE]
+
+[Preprocessing Container]
+sudo docker build -t fifapreprocessingapi:0.0.1 .
+sudo docker tag fifapreprocessingapi:0.0.1 eu.gcr.io/dataengineering-course/fifapreprocessingapi:0.0.1
+sudo docker push eu.gcr.io/dataengineering-course/fifapreprocessingapi:0.0.1
+
+[Database Container]
+sudo docker build -t databaseapi:0.0.1 .
+sudo docker tag databaseapi:0.0.1 eu.gcr.io/dataengineering-course/databaseapi:0.0.1
+sudo docker push eu.gcr.io/dataengineering-course/databaseapi:0.0.1
+
+[Training Container]
+sudo docker build -t trainingcpapi:0.0.1 .
+sudo docker tag trainingcpapi:0.0.1 eu.gcr.io/dataengineering-course/trainingcpapi:0.0.1
+sudo docker push eu.gcr.io/dataengineering-course/trainingcpapi:0.0.1
+
+[Predicting Container]
+sudo docker build -t predictionapi:0.0.1 .
+sudo docker tag predictionapi:0.0.1 eu.gcr.io/dataengineering-course/predictionapi:0.0.1
+sudo docker push eu.gcr.io/dataengineering-course/predictionapi:0.0.1
+
+ZET HET IN KUBERNETES (dit moet in de google cloud shell):
+
+kubectl create -f nfs-pvc-modelrepo.yaml
+
+kubectl create -f preprocess-cp.deployment.yaml
+kubectl create -f preprocess-cp.service.yaml
+
+kubectl create -f training-cp.deployment.yaml
+kubectl create -f training-cp.service.yaml
+
+kubectl create -f prediction-cp.deployment.yaml
+kubectl create -f prediction-cp.service.yaml
+
+kubectl get pods --namespace=myapps    (makesure all are running)
+kubectl get services --namespace=myapps (get external IPs)
+
+
+
+
 
 
 
