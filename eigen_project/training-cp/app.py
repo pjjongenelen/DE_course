@@ -26,5 +26,14 @@ def train_models(model):
         return json.dumps({'message': 'the given model is not supported dropped'},
                           sort_keys=False, indent=4), 400
 
+@app.route('/training-db/<table_name>', methods=['GET'])
+def read_data(table_name):
+    db_api = os.environ['TRAIN_DB_API']
+    r = requests.get(db_api)
+    resp = Response(r, status=200)
+
+    #df = read_data_records(table_name)
+    #df = df.drop(columns=['ID'])
+    #resp = Response(df.to_json(orient='records'), status=200, mimetype='application/json')
 
 app.run(host='0.0.0.0', port=5000)
