@@ -1,25 +1,22 @@
-# MLP for Pima Indians Dataset saved to single file
-# see https://machinelearningmastery.com/save-load-keras-deep-learning-models/
 import json
-import os
+import pandas as pd
 import xgboost as xgb
-from sklearn import model_selection, preprocessing
-import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 
-
+# This is a local implementation of our model_trainer file in the training component
+# The code is very similar, but not identical. Please keep in mind:
+# - we don't save the trained model
+# - we call the function using some operations from the json and pandas packages
 
 
 def train(dataset):
     # split into input (X) and output (Y) variables
-    Y = dataset.iloc[:,2].tolist()
+    Y = dataset.iloc[:, 2].tolist()
     X = dataset.drop(columns=['Value', "Name", "Preferred_Foot", "Work_Rate", "Position", "Work_Rate_A", "Work_Rate_D", "Contract_Valid_Until"], axis=1)
 
     # make train_test split
-    x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, random_state = 42)
+    x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, random_state=42)
     # define model
     model = xgb.XGBRegressor(objective='reg:squarederror', colsample_bytree=0.3, learning_rate=0.1,
                              max_depth=4, alpha=1, n_estimators=1)
@@ -35,15 +32,7 @@ def train(dataset):
         "Training Score": train_score,
         "MSE": mse,
     }
-    # Saving model in a given location (provided as an env. variable
-    model_repo = os.environ['MODEL_REPO']
-    if model_repo:
-        file_path = os.path.join(model_repo, "model.json")
-        model.save_model(file_path)
-    else:
-        model.save_model("model.json")
-        return json.dumps({'message': 'The model was saved locally.'},
-                          sort_keys=False, indent=4), 200
 
-    print("Saved the model to disk")
-    return json.dumps(text_out, sort_keys=False, indent=4)
+    # We don't save the model in this instance
+
+train(pd.DataFrame.from_dict(json.load(open("mc_data.json"))))
