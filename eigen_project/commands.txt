@@ -56,11 +56,6 @@ sudo docker build -t [SOURCE_IMAGE]
 docker tag [SOURCE_IMAGE] [HOSTNAME]/[PROJECT-ID]/[IMAGE]
 docker push [HOSTNAME]/[PROJECT-ID]/[IMAGE]
 
-[Preprocessing Container]
-sudo docker build -t fifapreprocessingapi:0.0.1 .
-sudo docker tag fifapreprocessingapi:0.0.1 eu.gcr.io/dataengineering-course/fifapreprocessingapi:0.0.1
-sudo docker push eu.gcr.io/dataengineering-course/fifapreprocessingapi:0.0.1
-
 [Database Container]
 sudo docker build -t databaseapi:0.0.1 .
 sudo docker tag databaseapi:0.0.1 eu.gcr.io/dataengineering-course/databaseapi:0.0.1
@@ -75,6 +70,11 @@ sudo docker push eu.gcr.io/dataengineering-course/trainingcpapi:0.0.1
 sudo docker build -t predictionapi:0.0.1 .
 sudo docker tag predictionapi:0.0.1 eu.gcr.io/dataengineering-course/predictionapi:0.0.1
 sudo docker push eu.gcr.io/dataengineering-course/predictionapi:0.0.1
+
+[Preprocessing Container]
+sudo docker build -t fifapreprocessingapi:0.0.1 .
+sudo docker tag fifapreprocessingapi:0.0.1 eu.gcr.io/dataengineering-course/fifapreprocessingapi:0.0.1
+sudo docker push eu.gcr.io/dataengineering-course/fifapreprocessingapi:0.0.1
 
 ZET HET IN KUBERNETES (dit moet in de google cloud shell):
 

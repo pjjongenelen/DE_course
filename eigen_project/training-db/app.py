@@ -1,6 +1,6 @@
 from flask import Flask, json, request, Response
 
-from resources.PROBEERSEL_JOOST06102020db_util.py import drop_tb, add_data_records, read_data_records, create_tb
+from resources.db_util.py import drop_tb, add_data_records, read_data_records, create_tb
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
