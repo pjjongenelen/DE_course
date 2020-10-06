@@ -33,10 +33,17 @@ sudo docker network inspect fifa_network <-- kijk of ze er aan hangen
 =-=-=-=-=-=-=-=-=INSOMNIA=-=-=-=-=-=-=-=-=
 
 (voor alle database related functies) --> http://{EXTERNAL IP}:5000/training-db/fifa
+create_database: POST request met columns in "set up database commands.txt"
+fill_database: PUT request met data van "data_for_model_creation.json"
+read_database: empty body GET request
 
-(voor alle training-cp related functies --> http://{EXTERNAL IP}:5001/training-cp/fifa
+(voor alle preprocessing-cp related functies) --> http://{EXTERNAL IP}:5001/preprocessing-cp/fifa
+preprocess_data: empty body POST request
 
-(voor alle prediction-cp related functies --> http://{external ip}:5002/prediction-cp/fifa
+(voor alle training-cp related functies --> http://{EXTERNAL IP}:5002/training-cp/fifa
+train_model: empty body (?) POST request
+
+(voor alle prediction-cp related functies --> http://{external ip}:5003/prediction-cp/fifa
 
 JSON snippet:
 {
