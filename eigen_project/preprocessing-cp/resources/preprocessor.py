@@ -26,14 +26,17 @@ def clean(dataset):
     data_repo = os.environ['DATA_REPO']
     if data_repo:
         file_path = os.path.join(data_repo)
-        json_string = dataset.to_json(file_path + "/preprocessed_data.json")
+        json_string = dataset.to_json(file_path + "/preprocessed_data_jsonstring.json")
 
-        return json.dumps(json_string, sort_keys=False, indent=4)
+        with open(file_path + "/preprocessed_data_json.json", 'w') as json_file:
+            json.dump(json_string, json_file)
+
+
 
     else:
         dataset.to_json("preprocessed_data.json")
         return json.dumps({'message': 'The data was saved locally.'},
                           sort_keys=False, indent=4), 200
 
-    #print("Saved the data to disk")
-    #return json.dumps(text_out, sort_keys=False, indent=4)
+    print("Saved the data to disk")
+    return json.dumps(text_out, sort_keys=False, indent=4)
