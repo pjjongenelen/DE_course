@@ -1,13 +1,8 @@
 http://34.91.81.251:5000/training-db/fifa
 
 
-http://34.91.81.251:5000/training-db/fifa
-
-
-
   {
 	"columns": [
-    "ID",
     "Name",
     "Age",
     "Value",
