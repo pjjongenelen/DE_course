@@ -42,3 +42,6 @@ kubectl create -f prediction-cp.service.yaml
 
 kubectl get pods --namespace=fifaxgb    (make sure all are running)
 kubectl get services --namespace=fifaxgb (get external IPs)
+
+[TESTEN IN INSOMNIA]
+http://EXTERNAL_IP:5002/training-cp/fifa
