@@ -1,0 +1,40 @@
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+
+helm repo update
+
+helm install nfs-server stable/nfs-server-provisioner --set persistence.enabled=true,persistence.size=100Gi --namespace=fifaxgb
+
+
+kubectl get pods --namespace=myapps
+kubectl get services --namespace=myapps
+kubectl get pv --namespace=myapps
+
+[DATABASE]
+
+kubectl create -f nfs-pvc-traindb.yaml
+kubectl get pvc --namespace=fifaxgb
+
+
+kubectl create -f training-db.deployment.yaml
+kubectl get pods --namespace=fifaxgb
+kubectl describe pod [put here name of pods] --namespace=fifaxgb
+
+laatste stap is erg belangrijk! de describe moet blijkbaar bij elke deployment step
+
+
+kubectl create -f training-db.service.yaml
+kubectl get services --namespace=fifaxgb
+kubectl describe services training-db-service --namespace=fifaxgb
+
+nu komt er een external IP als het goed is
+deze external IP kan je gebruiken in Insomnia
+
+[TRAIN AND PREDICTION]
+kubectl create -f nfs-pvc-modelrepo.yaml
+kubectl create -f training-cp.deployment.yaml
+kubectl create -f training-cp.service.yaml
+kubectl create -f prediction-cp.deployment.yaml
+kubectl create -f prediction-cp.service.yaml
+
+kubectl get pods --namespace=fifaxgb    (make sure all are running)
+kubectl get services --namespace=fifaxgb (get external IPs)
