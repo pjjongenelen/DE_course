@@ -123,18 +123,21 @@ http://[PREDICT-CP-EXTERNAL-IP]:5003/predict-cp/[MODEL-NAME]
 
 POST; 
 ```
------
-Updated to this point
 
------
 
 ## Tests
 
-Describe and show how to run the tests with code examples.
-Explain what these tests test and why.
+For load testing, the load testing framework Locust is used (https://locust.io/). 
+Two different locustfiles are present, though locustfile_external (for cloud deployment testing) does not work. 
 
 ```shell
-Locust code
+from locust import HttpUser, between, task
+
+class WebsiteUser(HttpUser):
+    wait_time = between(5, 15)
+
+    @task
+    def index(self):
+        self.client.get("/")
 ```
-
-
+The load testing document for local configurations. A single task is defined using a GET request. For the distributed version this is a POST request.
