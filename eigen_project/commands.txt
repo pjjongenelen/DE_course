@@ -50,6 +50,12 @@ JSON snippet:
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 VOOR LATER:
 
+KEY-FILE.json aanmaken in https://console.cloud.google.com/iam-admin/serviceaccounts?project=dataengineering-course
+
+gcloud auth activate-service-account SERIVCE_ACCOUNT --key-file=KEY-FILE
+gcloud auth print-access-token | sudo docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
+
+
 
 Publishing docker images (OM IN KUBERNETES TE ZETTEN):
 sudo docker build -t [SOURCE_IMAGE] 
@@ -75,6 +81,13 @@ sudo docker push eu.gcr.io/dataengineering-course/trainingcpapi:0.0.1
 sudo docker build -t predictionapi:0.0.1 .
 sudo docker tag predictionapi:0.0.1 eu.gcr.io/dataengineering-course/predictionapi:0.0.1
 sudo docker push eu.gcr.io/dataengineering-course/predictionapi:0.0.1
+
+
+
+
+
+
+
 
 ZET HET IN KUBERNETES (dit moet in de google cloud shell):
 
