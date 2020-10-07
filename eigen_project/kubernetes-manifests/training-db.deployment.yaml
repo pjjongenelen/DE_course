@@ -18,6 +18,7 @@ spec:
       containers:
       - image: eu.gcr.io/dataengineering-course/databaseapi:0.0.1 # Docker image name, that we pushed to GCR
         name: training-db-api     # POD name
+        imagePullPolicy: Always
         volumeMounts:
         - mountPath: /usr/src/tdb
           name: training-db-vol

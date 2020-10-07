@@ -1,3 +1,7 @@
+kubectl create -f namespace.yaml
+kubectl get namespaces
+kubectl describe namespaces fifaxgb
+
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 
 helm repo update
