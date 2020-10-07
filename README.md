@@ -98,6 +98,31 @@ you can access the system with software such as Insomnia.
 A processed version of the FIFA 19 complete player dataset, found here: https://www.kaggle.com/karangadiya/fifa19
 The JSON files data_for_model_creation and data_for_new_prediction are preprocessed to work with the components of this application.  
 
+## Api Reference
+
+In order to access the components, use the following URLs (we use Insomnia):
+
+```shell
+http://[TRAIN-DB-EXTERNAL-IP]:5000/training-db/fifaxgb
+
+POST; payload = columns.json
+PUT; payload = data_for_model_creation.json
+GET; {to check if the data has been put}
+```
+Now the training dataset is ready.
+ 
+```shell
+http://[TRAIN-CP-EXTERNAL-IP]:5002/training-cp/fifa
+
+POST;
+```
+Model has been trained
+
+```shell
+http://[PREDICT-CP-EXTERNAL-IP]:5003/predict-cp/[MODEL-NAME]
+
+POST; 
+```
 -----
 Updated to this point
 
@@ -112,11 +137,4 @@ Explain what these tests test and why.
 Locust code
 ```
 
-## Api Reference
-
-If the api is external, link to api documentation. If not describe your api including authentication methods as well as explaining all the endpoints with their required parameters.
-
-```shell
-Insomnia requests
-```
 

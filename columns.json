@@ -1,0 +1,32 @@
+{
+	"columns": [
+		"Name",
+		"Age",
+		"Value",
+		"Wage",
+		"Preferred_Foot",
+		"Weak_Foot",
+		"Trick_Skills",
+		"Work_Rate",
+		"Position",
+		"Jersey_Number",
+		"Contract_Valid_Until",
+		"Height",
+		"Weight",
+		"Striker",
+    "CentralMidfielder",
+		"SideMidfielder",
+		"WingBack",
+		"CenterBack",
+    "Crossing",
+		"Finishing",
+		"HeadingAccuracy",
+		"ShortPassing",
+		"Volleys",
+    "Dribbling",
+		"Curve",
+		"FreeKickAccuracy",
+		"LongPassing",
+    "BallControl"
+	]
+}
