@@ -8,6 +8,7 @@ from sklearn.metrics import mean_squared_error
 # The code is very similar, but not identical. Please keep in mind:
 # - we don't save the trained model
 # - we call the function using some operations from the json and pandas packages
+# - it uses mc_data.json instead of data_for_model_creation.json
 
 
 def train(dataset):
