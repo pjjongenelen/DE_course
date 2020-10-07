@@ -3,79 +3,104 @@
 
 ## Built With
 pandas 1.1.1  
-numpy 1.19.1
+numpy 1.19.1  
+flask 1.1.2  
+requests  
+os  
 
-----------
-
-Updated to this point
-
-----------
-
-
+Google Cloud platform virtual machines  
+Google Kubernetes Engine  
+Docker  
+Insomnia
+    
+    
 ## Installing / Getting started
 
-A quick introduction of the minimal setup you need to get a hello world up &
-running.
+The minimal commands to get the system up and running.
+
+Run the following commands in your Google cloud VM (region: euwest4-a):
 
 ```shell
-commands here
+gcloud auth activate-service-account [GOOGLE-SERVICE-ACCOUNT] --key-file=[KEY-FILE]
+gcloud auth configure-docker
+gcloud auth print-access-token | sudo docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
 ```
 
-Here you should say what actually happens when you execute the code above.
-
-## Developing
-
-
-### Prerequisites
-What is needed to set up the dev environment. For instance, global dependencies or any other tools. include download links.
-
-
-### Setting up Dev
-
-Here's a brief intro about what a developer must do in order to start developing
-the project further:
+The Google service account is authorized to publish docker images.
 
 ```shell
-git clone https://github.com/your/your-project.git
-cd your-project/
-packagemanager install
+git clone https://github.com/pjjongenelen/DE_course
+or
+git pull
+```
+```shell
+cd DE_course/eigen_project/training-db
+sudo docker build -t databaseapi:0.0.1 .
+sudo docker tag databaseapi:0.0.1 eu.gcr.io/dataengineering-course/databaseapi:0.0.1
+sudo docker push eu.gcr.io/dataengineering-course/databaseapi:0.0.1
+
+cd ..
+cd training-cp
+sudo docker build -t trainingcpapi:0.0.1 .
+sudo docker tag trainingcpapi:0.0.1 eu.gcr.io/dataengineering-course/trainingcpapi:0.0.1
+sudo docker push eu.gcr.io/dataengineering-course/trainingcpapi:0.0.1
+
+cd ..
+cd prediction-cp
+sudo docker build -t predictionapi:0.0.1 .
+sudo docker tag predictionapi:0.0.1 eu.gcr.io/dataengineering-course/predictionapi:0.0.1
+sudo docker push eu.gcr.io/dataengineering-course/predictionapi:0.0.1
 ```
 
-And state what happens step-by-step. If there is any virtual environment, local server or database feeder needed, explain here.
+All necessary images are pushed to the Google cloud image repository.
 
-### Building
-
-If your project needs some additional steps for the developer to build the
-project after some code changes, state them here. for example:
+Before executing the next steps, make sure to:
+Create a GKE cluster, and connect to it using the Google Cloud Shell
 
 ```shell
-./configure
-make
-make install
+kubectl create -f namespace.yaml
+
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo update
+helm install nfs-server stable/nfs-server-provisioner --set persistence.enabled=true,persistence.size=100Gi --namespace=fifaxgb
 ```
 
-Here again you should state what actually happens when the code above gets
-executed.
+Everything is ready to start creating the persitent volumes and pods.
 
-### Deploying / Publishing
-give instructions on how to build and release a new version
-In case there's some step you have to take that publishes this project to a
-server, this is the right time to state it.
+```shell 
+git clone https://github.com/pjjongenelen/DE_course
+or
+git pull
+```
 
 ```shell
-packagemanager deploy your-project -s server.com -u username -p password
+cd DE_2020/eigen_project/kubernetes-manifests
+kubectl create -f nfs-pvc-traindb.yaml
+kubectl get pvc --namespace=fifaxgb
+kubectl create -f training-db.deployment.yaml
+kubectl create -f training-db.service.yaml
+kubectl create -f nfs-pvc-modelrepo.yaml
+kubectl create -f training-cp.deployment.yaml
+kubectl create -f training-cp.service.yaml
+kubectl create -f prediction-cp.deployment.yaml
+kubectl create -f prediction-cp.service.yaml
+
+kubectl get pods --namespace=fifaxgb
+kubectl get services --namespace=fifaxgb
 ```
 
-And again you'd need to tell what the previous code actually does.
+The final command should return the external IPs of the components. With these
+you can access the system with software such as Insomnia.
 
-## Versioning
+## Database
 
-We can maybe use [SemVer](http://semver.org/) for versioning. For the versions available, see the [link to tags on this repository](/tags).
+A processed version of the FIFA 19 complete player dataset, found here: https://www.kaggle.com/karangadiya/fifa19
+The JSON files data_for_model_creation and data_for_new_prediction are preprocessed to work with the components of this application.  
 
+-----
+Updated to this point
 
-## Configuration
-
-Here you should write what are all of the configurations a user can enter when using the project.
+-----
 
 ## Tests
 
@@ -83,23 +108,14 @@ Describe and show how to run the tests with code examples.
 Explain what these tests test and why.
 
 ```shell
-Give an example
+Locust code
 ```
-
-## Style guide
-
-Explain your code style and show how to check it.
 
 ## Api Reference
 
 If the api is external, link to api documentation. If not describe your api including authentication methods as well as explaining all the endpoints with their required parameters.
 
+```shell
+Insomnia requests
+```
 
-## Database
-
-Explaining what database (and version) has been used. Provide download links.
-Documents your database design and schemas, relations etc... 
-
-## Licensing
-
-State what the license is and how to find the text version of the license.
