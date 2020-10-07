@@ -4,7 +4,7 @@ from resources.db_util.py import drop_tb, add_data_records, read_data_records, c
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
-
+db_util = DBUtil()
 
 @app.route('/training-db/<table_name>', methods=['POST'])
 def create_table(table_name):
