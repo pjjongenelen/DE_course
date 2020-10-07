@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 
-@app.route('/training-cp/<model>', methods=['POST'])
+@app.route('/training-cp/<model>', methods=['GET'])
 def train_models(model):
     db_api = os.environ['TRAIN_DB_API']
     r = requests.get(db_api)

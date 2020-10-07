@@ -62,11 +62,6 @@ sudo docker build -t [SOURCE_IMAGE]
 docker tag [SOURCE_IMAGE] [HOSTNAME]/[PROJECT-ID]/[IMAGE]
 docker push [HOSTNAME]/[PROJECT-ID]/[IMAGE]
 
-[Preprocessing Container]
-sudo docker build -t fifapreprocessingapi:0.0.1 .
-sudo docker tag fifapreprocessingapi:0.0.1 eu.gcr.io/dataengineering-course/fifapreprocessingapi:0.0.1
-sudo docker push eu.gcr.io/dataengineering-course/fifapreprocessingapi:0.0.1
-
 [Database Container]
 sudo docker build -t databaseapi:0.0.1 .
 sudo docker tag databaseapi:0.0.1 eu.gcr.io/dataengineering-course/databaseapi:0.0.1
@@ -82,12 +77,19 @@ sudo docker build -t predictionapi:0.0.1 .
 sudo docker tag predictionapi:0.0.1 eu.gcr.io/dataengineering-course/predictionapi:0.0.1
 sudo docker push eu.gcr.io/dataengineering-course/predictionapi:0.0.1
 
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+[Preprocessing Container]
+sudo docker build -t fifapreprocessingapi:0.0.1 .
+sudo docker tag fifapreprocessingapi:0.0.1 eu.gcr.io/dataengineering-course/fifapreprocessingapi:0.0.1
+sudo docker push eu.gcr.io/dataengineering-course/fifapreprocessingapi:0.0.1
+>>>>>>> 7c4b4c45b2ac34df0ce9b8264a0830776053f6f3
 
 ZET HET IN KUBERNETES (dit moet in de google cloud shell):
 
@@ -102,8 +104,8 @@ kubectl create -f training-cp.service.yaml
 kubectl create -f prediction-cp.deployment.yaml
 kubectl create -f prediction-cp.service.yaml
 
-kubectl get pods --namespace=myapps    (makesure all are running)
-kubectl get services --namespace=myapps (get external IPs)
+kubectl get pods --namespace=fifaxgb     (make sure all are running)
+kubectl get services --namespace=fifaxgb (get external IPs)
 
 
 

@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 git clone https://github.com/pjjongenelen/DE_course.git
 git pull origin tc_kuber
+=======
+kubectl create -f namespace.yaml
+kubectl get namespaces
+kubectl describe namespaces fifaxgb
+
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+>>>>>>> 7c4b4c45b2ac34df0ce9b8264a0830776053f6f3
 
 kubectl create -f namespace.yaml
 kubectl get namespaces
@@ -19,7 +27,6 @@ kubectl get pv --namespace=fifaxgb
 
 kubectl create -f nfs-pvc-traindb.yaml
 kubectl get pvc --namespace=fifaxgb
-
 
 kubectl create -f training-db.deployment.yaml
 kubectl get pods --namespace=fifaxgb
@@ -44,3 +51,6 @@ kubectl create -f prediction-cp.service.yaml
 
 kubectl get pods --namespace=fifaxgb    (make sure all are running)
 kubectl get services --namespace=fifaxgb (get external IPs)
+
+[TESTEN IN INSOMNIA]
+http://EXTERNAL_IP:5002/training-cp/fifa

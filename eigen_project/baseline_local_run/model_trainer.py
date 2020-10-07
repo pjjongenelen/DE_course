@@ -36,3 +36,6 @@ def train(dataset):
     # We don't save the model in this instance
 
 train(pd.DataFrame.from_dict(json.load(open("mc_data.json"))))
+
+dataset = pd.DataFrame.from_dict(json.load(open("mc_data.json")))
+print(dataset.columns)
