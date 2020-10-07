@@ -8,7 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 #hoe de strings in de class te verwerken? (heb ze nu in de create_tb functie gezet maar staat er erg lelijk vind ik
 # strings = ["Name", "Preferred_Foot", "Work_Rate", "Position", "Work_Rate_A", "Work_Rate_D", "Contract_Valid_Until"]
 
-    class DBUTIL:
+class DBUTIL:
 
     def __init__(self):
         db_loc = os.environ['DB_LOC']
